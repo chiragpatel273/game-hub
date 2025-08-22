@@ -1,15 +1,9 @@
-import { Button, HStack } from '@chakra-ui/react'
 import './App.css'
+import Layout from './components/layout/Layout'
 
 function App() {
-  
   return (
-    <>
-      <HStack>
-        <Button>Click me</Button>
-        <Button>Click me</Button>
-      </HStack>
-    </>
+    <Layout />
   )
 }
 
