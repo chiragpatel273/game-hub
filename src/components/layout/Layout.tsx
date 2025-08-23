@@ -17,7 +17,10 @@ const Layout = () => {
           width="64"
           borderRightWidth="1px"
           display={{ base: "none", md: "block" }}>
-          <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} />
+          <GenreList
+            onSelectGenre={(genre) => setSelectedGenre(genre)}
+            selectedGenre={selectedGenre}
+          />
         </Box>
         <Box as="main" flex="1" overflowY="auto" p="4">
           <GameGrid selectedGenre={selectedGenre} />
