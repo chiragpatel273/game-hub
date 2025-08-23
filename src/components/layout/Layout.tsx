@@ -1,6 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
-import NavBar from "./NavBar";
 import GameGrid from "./GameGrid";
+import GenreList from "./GenreList";
+import NavBar from "./NavBar";
 
 const Layout = () => {
   return (
@@ -11,8 +12,9 @@ const Layout = () => {
           as="nav"
           width="64"
           borderRightWidth="1px"
-          display={{ base: "none", md: "block" }}
-        />
+          display={{ base: "none", md: "block" }}>
+          <GenreList />
+        </Box>
         <Box as="main" flex="1" overflowY="auto" p="4">
           <GameGrid />
         </Box>
