@@ -1,25 +1,27 @@
 import type { Game } from "@/hooks/useGames";
-import { getGameImage } from "@/utils/gameImage";
-import { Card, CardBody, Heading, Image } from "@chakra-ui/react";
+import { Card, CardBody, Heading, HStack, Image } from "@chakra-ui/react";
+import PlatformIconList from "./PlatformIconList";
 
 interface Props {
     game: Game;
 }
 
 const GameCard = ({ game }: Props) => {
-    const src = getGameImage({ image: game.image, title: game.title });
 
     return (
         <Card.Root>
             <Image
-                src={src}
-                alt={game.title}
+                src={game.background_image}
+                alt={game.name}
                 objectFit="cover"
                 aspectRatio={16 / 9}
                 borderTopRadius="md"
             />
             <CardBody>
-                <Heading fontSize="xl">{game.title}</Heading>
+                <HStack justifyContent='space-between' marginBottom={3}>
+                    <PlatformIconList platforms={game.parent_platforms?.map(p => p.platform)} />
+                </HStack>
+                <Heading fontSize='2xl'>{game.name}</Heading>
             </CardBody>
         </Card.Root>
     );
