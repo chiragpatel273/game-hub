@@ -1,33 +1,7 @@
-import apiClient from "@/services/api-client";
-import { useEffect, useState } from "react";
-
-interface Game {
-    id: number;
-    title: string;
-    genre: string;
-}
-
-interface FetchGameResponse {
-    message: string;
-    data: Game[];
-}
+import useGames from "@/hooks/useGames";
 
 const GameGrid = () => {
-    const [games, setGames] = useState<Game[]>([]);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const fetchGames = async () => {
-            try {
-                const response = await apiClient.get<FetchGameResponse>('/games');
-                setGames(response.data.data);
-            } catch (err) {
-                setError("Failed to fetch games");
-            }
-        };
-
-        fetchGames();
-    }, []);
+    const { games, error } = useGames();
 
     return (
         <div className="game-grid">
