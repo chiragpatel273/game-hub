@@ -3,6 +3,7 @@ import type { Platform } from "@/hooks/usePlatforms";
 import { Box, Flex } from "@chakra-ui/react";
 import { useState } from "react";
 import GameGrid from "./GameGrid";
+import GameHeading from "./GameHeading";
 import GenreList from "./GenreList";
 import NavBar from "./NavBar";
 import PlatformSelector from "./PlatformSelector";
@@ -32,6 +33,7 @@ const Layout = () => {
           />
         </Box>
         <Box as="main" flex="1" overflowY="auto" p="4">
+          <GameHeading gameQuery={gameQuery} />
           <Flex
             mb={4}
             gap={3}
