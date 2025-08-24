@@ -7,9 +7,13 @@ import GenreList from "./GenreList";
 import NavBar from "./NavBar";
 import PlatformSelector from "./PlatformSelector";
 
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+}
+
 const Layout = () => {
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(null);
+  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null });
   return (
     <Flex direction="column" minH="100dvh">
       <NavBar />
@@ -20,8 +24,8 @@ const Layout = () => {
           borderRightWidth="1px"
           display={{ base: "none", md: "block" }}>
           <GenreList
-            onSelectGenre={(genre) => setSelectedGenre(genre)}
-            selectedGenre={selectedGenre}
+            onSelectGenre={(genre) => setGameQuery({ ...gameQuery, genre })}
+            selectedGenre={gameQuery.genre}
           />
         </Box>
         <Box as="main" flex="1" overflowY="auto" p="4">
@@ -32,9 +36,9 @@ const Layout = () => {
             align="center"
             justify="space-between"
           >
-            <PlatformSelector onSelectPlatform={(platform) => setSelectedPlatform(platform)} selectedPlatform={selectedPlatform} />
+            <PlatformSelector onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform })} selectedPlatform={gameQuery.platform} />
           </Flex>
-          <GameGrid selectedGenre={selectedGenre} selectedPlatform={selectedPlatform} />
+          <GameGrid gameQuery={gameQuery} />
         </Box>
       </Flex>
     </Flex>

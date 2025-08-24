@@ -31,7 +31,6 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
                                 key={platform.id}
                                 onSelect={() => onSelectPlatform(platform)}
                                 cursor="pointer"
-                                _hover={{ bg: "whiteAlpha.100" }}
                             >
                                 {platform.name}
                             </Menu.Item>
