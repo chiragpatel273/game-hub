@@ -12,13 +12,14 @@ export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
   sortOrder: string;
+  searchText: string;
 }
 
 const Layout = () => {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null, sortOrder: "" });
+  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null, sortOrder: "", searchText: "" });
   return (
     <Flex direction="column" minH="100dvh">
-      <NavBar />
+      <NavBar onSearch={(searchText) => setGameQuery({ ...gameQuery, searchText })} />
       <Flex flex="1" overflow="hidden">
         <Box
           as="nav"

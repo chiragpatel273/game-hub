@@ -1,7 +1,12 @@
-import { Flex, Text, Box } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { ColorModeButton, useColorModeValue } from "../ui/color-mode";
+import SearchInput from "./SearchInput";
 
-const NavBar = () => {
+interface Props {
+  onSearch?: (value: string) => void;
+}
+
+const NavBar = ({ onSearch }: Props) => {
   const bg = useColorModeValue("white", "gray.900");
   const border = useColorModeValue("gray.200", "whiteAlpha.300");
   return (
@@ -15,7 +20,8 @@ const NavBar = () => {
       bg={bg}
       borderColor={border}
     >
-      <Text fontWeight="semibold">Game Hub</Text>
+      <Text fontWeight="semibold" whiteSpace="nowrap">Game Hub</Text>
+      <SearchInput onSearch={onSearch} />
       <Box ml="auto">
         <ColorModeButton />
       </Box>
