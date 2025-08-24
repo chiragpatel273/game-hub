@@ -6,14 +6,16 @@ import GameGrid from "./GameGrid";
 import GenreList from "./GenreList";
 import NavBar from "./NavBar";
 import PlatformSelector from "./PlatformSelector";
+import SortSelector from "./SortSelector";
 
 export interface GameQuery {
   genre: Genre | null;
   platform: Platform | null;
+  sortOrder: string;
 }
 
 const Layout = () => {
-  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null });
+  const [gameQuery, setGameQuery] = useState<GameQuery>({ genre: null, platform: null, sortOrder: "" });
   return (
     <Flex direction="column" minH="100dvh">
       <NavBar />
@@ -34,9 +36,9 @@ const Layout = () => {
             gap={3}
             wrap="wrap"
             align="center"
-            justify="space-between"
           >
             <PlatformSelector onSelectPlatform={(platform) => setGameQuery({ ...gameQuery, platform })} selectedPlatform={gameQuery.platform} />
+            <SortSelector onSelectSortOrder={(sortOrder) => setGameQuery({ ...gameQuery, sortOrder })} sortOrder={gameQuery.sortOrder} />
           </Flex>
           <GameGrid gameQuery={gameQuery} />
         </Box>
