@@ -1,6 +1,7 @@
 import usePlatforms, { type Platform } from "@/hooks/usePlatforms";
 import { Button, HStack, Icon, Menu, Portal } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
+import { useColorModeValue } from "../ui/color-mode";
 
 interface Props {
     onSelectPlatform: (platform: Platform) => void;
@@ -12,6 +13,8 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
 
     if (error) return null;
 
+    const itemHover = useColorModeValue('gray.100', 'whiteAlpha.100');
+    const itemActive = useColorModeValue('gray.200', 'whiteAlpha.200');
     return (
         <Menu.Root>
             <Menu.Trigger asChild>
@@ -31,6 +34,8 @@ const PlatformSelector = ({ onSelectPlatform, selectedPlatform }: Props) => {
                                 key={platform.id}
                                 onSelect={() => onSelectPlatform(platform)}
                                 cursor="pointer"
+                                _hover={{ bg: itemHover }}
+                                _active={{ bg: itemActive }}
                             >
                                 {platform.name}
                             </Menu.Item>

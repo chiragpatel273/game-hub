@@ -1,6 +1,7 @@
 import useGenres, { type Genre } from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
 import { Box, Button, Heading, HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
+import { useColorModeValue } from "../ui/color-mode";
 
 interface Props {
     onSelectGenre: (genre: Genre) => void;
@@ -12,6 +13,11 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
 
     if (error) return null;
     if (loading) return <Spinner />;
+
+    const activeBg = useColorModeValue("gray.200", "whiteAlpha.200");
+    const activeHover = useColorModeValue("gray.300", "whiteAlpha.300");
+    const hoverBg = useColorModeValue("gray.100", "whiteAlpha.100");
+    const activeColor = useColorModeValue("teal.600", "teal.300");
 
     return (
         <>
@@ -35,12 +41,12 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
                                 gap={3}
                                 rounded="md"
                                 cursor="pointer"
-                                bg={isActive ? "whiteAlpha.200" : "transparent"}
-                                _hover={{ bg: isActive ? "whiteAlpha.300" : "whiteAlpha.100", transform: "translateX(4px)" }}
-                                _active={{ bg: "whiteAlpha.300" }}
+                                bg={isActive ? activeBg : "transparent"}
+                                _hover={{ bg: isActive ? activeHover : hoverBg, transform: "translateX(4px)" }}
+                                _active={{ bg: activeHover }}
                                 transition="all 0.18s ease"
                                 fontWeight={isActive ? "semibold" : "medium"}
-                                color={isActive ? "teal.300" : undefined}
+                                color={isActive ? activeColor : undefined}
                             >
                                 <HStack align="center" gap={3} w="full">
                                     <Box flexShrink={0}>

@@ -2,6 +2,7 @@ import { Box, Icon, Input } from "@chakra-ui/react";
 import type { FormEvent } from "react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
+import { useColorModeValue } from "../ui/color-mode";
 
 interface Props {
     onSearch?: (value: string) => void;
@@ -17,6 +18,10 @@ const SearchInput = ({ onSearch }: Props) => {
 
     // (reverted) Removing dark-mode custom overrides; rely on default theme styles.
 
+    const iconColor = useColorModeValue('gray.500', 'whiteAlpha.700');
+    const placeholderColor = useColorModeValue('gray.500', 'whiteAlpha.600');
+    const focusRing = useColorModeValue('teal.500', 'teal.300');
+
     return (
         <form onSubmit={handleSubmit} style={{ width: "100%" }}>
             <Box position="relative" w="full">
@@ -30,8 +35,7 @@ const SearchInput = ({ onSearch }: Props) => {
                     transform="translateY(-50%)"
                     pointerEvents="none"
                     zIndex={1}
-                    // basic dark mode aware color (html.dark class from next-themes)
-                    color={typeof document !== 'undefined' && document.documentElement.classList.contains('dark') ? 'whiteAlpha.700' : 'gray.500'}
+                    color={iconColor}
                 />
                 <Input
                     ref={ref}
@@ -40,7 +44,8 @@ const SearchInput = ({ onSearch }: Props) => {
                     placeholder="Search games..."
                     variant="subtle"
                     fontSize="sm"
-                    _focus={{ boxShadow: "outline" }}
+                    _placeholder={{ color: placeholderColor }}
+                    _focusVisible={{ boxShadow: `0 0 0 1px ${focusRing}` }}
                     autoComplete="off"
                 />
             </Box>
