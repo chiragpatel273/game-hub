@@ -32,8 +32,5 @@
     "vite": "7.1.2",
     "vite-tsconfig-paths": "^5.1.4",
     "rollup": "^4.24.0"
-  },
-  "engines": {
-    "node": "20.x"
   }
 }
