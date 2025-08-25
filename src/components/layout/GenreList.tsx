@@ -1,6 +1,6 @@
 import useGenres, { type Genre } from "@/hooks/useGenres";
 import getCroppedImageUrl from "@/services/image-url";
-import { Box, Button, Heading, HStack, Image, List, ListItem, Spinner, Text } from "@chakra-ui/react";
+import { Box, Button, Heading, HStack, Image, List, ListItem, Skeleton, Text } from "@chakra-ui/react";
 import { useColorModeValue } from "../ui/color-mode";
 
 interface Props {
@@ -12,7 +12,29 @@ const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
     const { data, error, loading } = useGenres();
 
     if (error) return null;
-    if (loading) return <Spinner />;
+    if (loading) {
+        const placeholders = Array.from({ length: 10 });
+        return (
+            <>
+                <Heading fontSize="2xl" mt={3} mb={3} letterSpacing="wide">
+                    Genres
+                </Heading>
+                <List.Root display="flex" flexDirection="column" gap={1} aria-busy="true">
+                    {placeholders.map((_, i) => (
+                        <ListItem key={i} px={1}>
+                            <HStack px={2} py={2} gap={3} rounded="md">
+                                <Skeleton rounded="md" boxSize="34px" />
+                                <Box flex="1">
+                                    <Skeleton height="3" width={`${60 + (i % 4) * 5}%`} mb={2} />
+                                    <Skeleton height="3" width={`${35 + (i % 5) * 5}%`} />
+                                </Box>
+                            </HStack>
+                        </ListItem>
+                    ))}
+                </List.Root>
+            </>
+        );
+    }
 
     const activeBg = useColorModeValue("gray.200", "whiteAlpha.200");
     const activeHover = useColorModeValue("gray.300", "whiteAlpha.300");
